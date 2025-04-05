@@ -150,6 +150,9 @@ sql.connect(dbConfig).then(pool => {
     }
   });
 
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+  });
   // Start server
   app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
