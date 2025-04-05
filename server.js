@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/')));
 
 // SQL Server Configuration
 const dbConfig = {
@@ -149,10 +149,8 @@ sql.connect(dbConfig).then(pool => {
       res.status(500).json({ error: "Failed to fetch students." });
     }
   });
+  
 
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-  });
   // Start server
   app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
