@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hobbies & Skills</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Enter Your Hobbies & Skills</h2>
+  <form id="skillsForm">
+    Hobbies: <input type="text" id="hobby" placeholder="e.g. Reading, Music" required><br>
+    Skills: <input type="text" id="skills" placeholder="e.g. Java, Python" required><br>
+    <button type="submit">Submit</button>
+  </form>
+  <div>
+    <button onclick="history.back()">Previous</button>
+    <button onclick="goNext()">Next</button>
+  </div>
+
+  <script>
+    document.getElementById("skillsForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const hobby = document.getElementById("hobby").value.trim();
+      const skills = document.getElementById("skills").value.trim();
+
+      if (hobby === "" || skills === "") {
+        alert("❌ Please fill in both fields.");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost:3000/skills", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ hobby, skills })
+        });
+
+        if (response.ok) {
+          alert("✅ Skills submitted successfully!");
+          window.location.href = "thankyou.html";
+        } else {
+          throw new Error("Submission failed");
+        }
+      } catch (err) {
+        alert("❌ Failed to submit skills.");
+        console.error(err);
+      }
+    });
+
+    function goNext() {
+      window.location.href = "thankyou.html";
+    }
+  </script>
+</body>
+</html>

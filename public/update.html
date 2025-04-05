@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Contact</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Update Contact Info</h2>
+  <form id="updateForm">
+    Email: <input type="email" id="email" required><br>
+    Mobile: <input type="text" id="mobile" pattern="[0-9]{10}" required><br>
+    <button type="submit">Submit</button>
+  </form>
+  <div>
+    <button onclick="history.back()">Previous</button>
+    <button onclick="goNext()">Next</button>
+  </div>
+
+  <script>
+    document.getElementById("updateForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+
+      if (email === "" || !/^\d{10}$/.test(mobile)) {
+        alert("❌ Please enter a valid email and 10-digit mobile number.");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost:3000/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, phone: mobile })  // Ensure "phone" matches server key
+        });
+
+        if (response.ok) {
+          alert("✅ Successfully updated!");
+          window.location.href = "skills.html";
+        } else {
+          throw new Error("Failed to update.");
+        }
+      } catch (error) {
+        alert("❌ Error updating contact info!");
+        console.error("Update error:", error);
+      }
+    });
+
+    function goNext() {
+      window.location.href = "skills.html";
+    }
+  </script>
+</body>
+</html>

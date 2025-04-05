@@ -1,0 +1,86 @@
+/* Global reset and base styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    color: #333;
+    padding: 30px;
+    min-height: 100vh;
+  }
+  
+  /* Form card */
+  form {
+    background: white;
+    max-width: 500px;
+    margin: auto;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  
+  /* Form elements */
+  input[type="text"],
+  input[type="number"],
+  input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+  
+  input:focus {
+    border-color: #ff7e5f;
+    outline: none;
+    background-color: #fff8f5;
+  }
+  
+  /* Buttons */
+  button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    background: #ff416c;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #ff6a00, #ee0979);
+  }
+  
+  /* Heading styles */
+  h2 {
+    text-align: center;
+    color: #4a148c;
+    margin-bottom: 20px;
+  }
+  
+  /* Navigation buttons container */
+  div {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Mobile responsive tweaks */
+  @media (max-width: 600px) {
+    form {
+      padding: 20px;
+    }
+  
+    input, button {
+      font-size: 16px;
+    }
+  }
+  
