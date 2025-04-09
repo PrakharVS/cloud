@@ -17,7 +17,6 @@ const dbConfig = {
   password: 'Singha@321',
   server: 'prakharvs.database.windows.net',
   database: 'Prakhar',
-  port: 1433,
   options: {
     encrypt: true, // Required for Azure
     trustServerCertificate: false
@@ -152,6 +151,10 @@ sql.connect(dbConfig).then(pool => {
   
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+  
+  app.get('/api/health', (req, res) => {
+    res.json({status: "working"});
   });
   
 
