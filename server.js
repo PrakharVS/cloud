@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const sql = require('mssql');
@@ -5,29 +6,26 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
-// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// SQL Server Configuration
+
+
 const dbConfig = {
-  user: 'prakhar@prakharvs',
-  password: 'Singha@321',
-  server: 'prakharvs.database.windows.net',
-  database: 'Prakhar',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
   options: {
-    encrypt: true, // Required for Azure
+    encrypt: true,
     trustServerCertificate: false
   }
 };
 
-// Connect to SQL and define routes after connection is established
 sql.connect(dbConfig).then(pool => {
   console.log('✅ Connected to Azure SQL Server');
 
-  // Create table if not exists
   pool.request().query(`
     IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Students')
     BEGIN
